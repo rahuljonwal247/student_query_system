@@ -15,6 +15,9 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/api", routes);
+app.get('/', (req, res) => {
+  res.send('Server running .....................');
+});
 app.use("/uploads", express.static("uploads")); // Serve uploaded files
 
 initSocket(server); // Initialize socket
