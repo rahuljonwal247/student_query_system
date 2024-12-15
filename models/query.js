@@ -13,9 +13,10 @@ const Query = sequelize.define('Query', {
     allowNull: false,
   },
   status: {
-    type: DataTypes.ENUM('Pending', 'In Progress', 'Resolved'),
+    type: DataTypes.ENUM('Pending', 'In Progress', 'Resolved','Under Investigation','Approved'),
     defaultValue: 'Pending',
   },
+
   resolverId: {
     type: DataTypes.UUID,
     allowNull: true,
@@ -32,20 +33,28 @@ const Query = sequelize.define('Query', {
       key: 'id',
     },
   },
+  investigationId: {
+    type: DataTypes.UUID,
+    allowNull: true,
+    references: {
+      model: 'Users',
+      key: 'id',
+    },
+  },
   attachment: {
-    type: DataTypes.STRING, // You can change this to DataTypes.BLOB if storing the file itself
-    allowNull: true,        // Allowing null for optional attachments
+    type: DataTypes.STRING, 
+    allowNull: true,        
   },
-  internalNotes: {  // Add internalNotes field
+  internalNotes: {  
     type: DataTypes.TEXT,
-    allowNull: true,  // Allow null as it might not always be required
+    allowNull: true,  
   },
-  resolutionSummary: {  // Add resolutionSummary field
+  resolutionSummary: {  
     type: DataTypes.TEXT,
-    allowNull: true,  // Allow null as it might not always be required
+    allowNull: true,  
   },
 }, {
-  timestamps: true, // Automatically adds createdAt and updatedAt columns
+  timestamps: true, 
 });
 
 module.exports = Query;
